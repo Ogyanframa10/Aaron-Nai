@@ -1,36 +1,380 @@
-index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aaron Nai — Portfolio</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 720px;
-           margin: 60px auto; padding: 0 20px; color: #1a1a1a;
-           line-height: 1.6; }
-    h1 { font-size: 42px; margin-bottom: 4px; }
-    .role { color: #00B4D8; font-weight: 600; margin-bottom: 30px; }
-    .skill { background: #E8F4FD; color: #1565C0; padding: 4px 10px;
-             border-radius: 14px; font-size: 13px; margin-right: 6px; }
-    a { color: #1565C0; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaron Nai — Cloud Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0F14;
+    --bg-panel: #121922;
+    --bg-panel-2: #161F2A;
+    --line: #223040;
+    --text: #E9EEF3;
+    --text-dim: #8FA1B3;
+    --accent: #52D9C4;
+    --accent-dim: #2E7A6D;
+    --amber: #F2A65A;
+    --radius: 10px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--accent); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 24px; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; margin:0; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- Top status strip ---------- */
+  .statusbar{
+    border-bottom:1px solid var(--line);
+    background:var(--bg-panel);
+  }
+  .statusbar .wrap{
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    padding:10px 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-dim);
+    align-items:center;
+  }
+  .statusbar .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+    margin-right:6px;
+    box-shadow:0 0 8px var(--accent);
+  }
+  .statusbar strong{ color:var(--text); font-weight:500; }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:72px 0 56px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    display:flex; gap:36px; align-items:center; flex-wrap:wrap;
+  }
+  .hero-photo{
+    width:120px; height:120px; border-radius:50%;
+    object-fit:cover; flex-shrink:0;
+    border:2px solid var(--line);
+  }
+  .hero-text h1{
+    font-size:2.6rem; font-weight:700; letter-spacing:-0.02em;
+    margin-bottom:10px;
+  }
+  .hero-role{
+    font-size:1.05rem; color:var(--accent);
+    font-weight:500;
+    margin-bottom:6px;
+  }
+  .hero-loc{
+    color:var(--text-dim); font-size:0.92rem;
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding:52px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--accent);
+    letter-spacing:0.08em;
+    margin-bottom:10px;
+    display:block;
+  }
+  section h2{
+    font-size:1.5rem;
+    margin-bottom:20px;
+  }
+  .lede{
+    color:var(--text-dim);
+    max-width:640px;
+    margin-bottom:28px;
+  }
+
+  /* ---------- Skills ---------- */
+  .skill-group{ margin-bottom:20px; }
+  .skill-group h3{
+    font-family:'Inter', sans-serif;
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:10px;
+  }
+  .pills{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pill{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    padding:6px 12px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--text);
+    background:var(--bg-panel);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+    gap:16px;
+  }
+  .card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .card .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--amber);
+    letter-spacing:0.05em;
+    margin-bottom:8px;
+    display:block;
+  }
+  .card h3{
+    font-size:1.02rem;
+    margin-bottom:8px;
+    line-height:1.3;
+  }
+  .card p{
+    color:var(--text-dim);
+    font-size:0.9rem;
+    margin:0 0 10px;
+  }
+  .card .stack{
+    display:flex; flex-wrap:wrap; gap:6px;
+  }
+  .card .stack span{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--text-dim);
+    border:1px solid var(--line);
+    padding:2px 8px;
+    border-radius:12px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:flex; flex-wrap:wrap; gap:28px;
+  }
+  .contact-item .label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    display:block;
+    margin-bottom:4px;
+  }
+  .contact-item .value{ font-size:0.98rem; }
+
+  footer{
+    padding:28px 0 48px;
+    color:var(--text-dim);
+    font-size:0.82rem;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  @media (max-width:600px){
+    .hero-inner{ flex-direction:column; align-items:flex-start; text-align:left; }
+    .hero-text h1{ font-size:2.1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+</style>
 </head>
 <body>
-  <h1>Aaron Nai</h1>
-  <p class="role">Aspiring to be one of the greatest Cloud Engineer· Accra, Ghana</p>
-  <h2>About</h2>
-  <p>I'm learning AWS through the cloudwithshad bootcamp.
-     This site is hosted on S3 + CloudFront — built in week 1.</p>
-  <h2>Skills</h2>
-  <p>
-    <span class="skill">AWS</span>
-    <span class="skill">S3</span>
-    <span class="skill">EC2</span>
-    <span class="skill">Linux</span>
-  </p>
-  <h2>+233 209519144</h2>
-  <p>Email: <a href="mailto:aaronhoratious@gmail.com">aaronhoratious@gmail.com</a><br>
-     LinkedIn: <a href="https://www.linkedin.com/in/aaron-nai-07b869259/?skipRedirect=true">www.linkedin.com/in/aaron-nai-07b869259</a></p>
+
+  <div class="statusbar">
+    <div class="wrap">
+      <span><span class="dot"></span><strong>status:</strong> open to work</span>
+      <span><strong>region:</strong> accra, gh</span>
+      <span><strong>focus:</strong> aws / cloud infrastructure</span>
+      <span><strong>background:</strong> grc &amp; it audit</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <img src="aaron pic.jpg" alt="Aaron Nai" class="hero-photo">
+      <div class="hero-text">
+        <h1>Aaron Nai</h1>
+        <div class="hero-role">Cloud Engineer (AWS) — in training · GRC &amp; IT Audit Analyst</div>
+        <div class="hero-loc">Accra, Greater Accra Region, Ghana</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <span class="eyebrow">01 — about</span>
+      <h2>From compliance to cloud</h2>
+      <p class="lede">
+        I started in IT audit and risk management — reading infrastructure for what could go wrong.
+        Now I'm learning to build the infrastructure itself. I recently completed an AWS Cloud
+        Engineering bootcamp, where I designed and deployed the projects below: a CI/CD pipeline,
+        a secured VPC, a two-tier application backed by RDS, an auto-scaling web tier behind a
+        load balancer, and an AI-powered document analyzer. Compliance frameworks taught me what
+        "secure and available" has to mean in practice — this is me learning to deliver it.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <span class="eyebrow">02 — skills</span>
+      <h2>What I work with</h2>
+
+      <div class="skill-group">
+        <h3>Cloud &amp; Infrastructure</h3>
+        <div class="pills">
+          <span class="pill">AWS</span>
+          <span class="pill">Amazon EC2</span>
+          <span class="pill">Amazon VPC</span>
+          <span class="pill">Amazon RDS</span>
+          <span class="pill">Amazon S3</span>
+          <span class="pill">Auto Scaling</span>
+          <span class="pill">Elastic Load Balancing</span>
+          <span class="pill">IAM</span>
+          <span class="pill">CloudFront</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>DevOps</h3>
+        <div class="pills">
+          <span class="pill">CI/CD</span>
+          <span class="pill">Git / GitHub</span>
+          <span class="pill">Linux</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Governance, Risk &amp; Compliance</h3>
+        <div class="pills">
+          <span class="pill">SOX</span>
+          <span class="pill">PCI-DSS</span>
+          <span class="pill">ISO 27001</span>
+          <span class="pill">GDPR</span>
+          <span class="pill">HIPAA</span>
+          <span class="pill">CCPA</span>
+          <span class="pill">NIST</span>
+          <span class="pill">SOC 2</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <span class="eyebrow">03 — projects</span>
+      <h2>AWS capstone builds</h2>
+      <p class="lede">Seven hands-on projects from my cloud engineering bootcamp, each built and deployed on AWS.</p>
+
+      <div class="projects">
+
+        <div class="card">
+          <span class="tag">CI/CD</span>
+          <h3>Automated Deployment Pipeline</h3>
+          <p>Built a CI/CD pipeline to automate build, test, and deployment stages — reducing manual release steps and improving consistency.</p>
+          <div class="stack"><span>CodePipeline</span><span>CodeBuild</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">HOSTING</span>
+          <h3>Portfolio Website</h3>
+          <p>Designed and deployed a personal portfolio site on AWS, including static hosting and content delivery setup.</p>
+          <div class="stack"><span>S3</span><span>CloudFront</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">COMPUTE</span>
+          <h3>EC2 Web Server</h3>
+          <p>Provisioned and configured an EC2 instance to host a live web server, including security group rules and access hardening.</p>
+          <div class="stack"><span>EC2</span><span>Security Groups</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">NETWORKING</span>
+          <h3>Custom VPC Architecture</h3>
+          <p>Designed a VPC with public and private subnets, route tables, and gateways to isolate and secure application tiers.</p>
+          <div class="stack"><span>VPC</span><span>NAT Gateway</span><span>Route Tables</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">DATABASE</span>
+          <h3>Two-Tier App with RDS</h3>
+          <p>Deployed a two-tier application separating app logic from a managed relational database backend for better security.</p>
+          <div class="stack"><span>RDS</span><span>EC2</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">AVAILABILITY</span>
+          <h3>Auto Scaling + Load Balancer</h3>
+          <p>Configured an Auto Scaling Group behind an Application Load Balancer so capacity adjusts automatically with demand.</p>
+          <div class="stack"><span>ALB</span><span>Auto Scaling Groups</span></div>
+        </div>
+
+        <div class="card">
+          <span class="tag">AI / ML</span>
+          <h3>Smart Document Analyzer</h3>
+          <p>Built a document analysis tool that extracts and processes information from uploaded documents using AWS services.</p>
+          <div class="stack"><span>Lambda</span><span>Textract</span><span>S3</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <span class="eyebrow">04 — contact</span>
+      <h2>Let's talk</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="label">Phone</span>
+          <span class="value">+233 209519144</span>
+        </div>
+        <div class="contact-item">
+          <span class="label">Email</span>
+          <span class="value"><a href="mailto:aaronhoratious@gmail.com">aaronhoratious@gmail.com</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="label">LinkedIn</span>
+          <span class="value"><a href="https://www.linkedin.com/in/aaron-nai-07b869259" target="_blank" rel="noopener">linkedin.com/in/aaron-nai-07b869259</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      built with html, css &amp; deployed on github pages — aaron nai © 2026
+    </div>
+  </footer>
+
 </body>
 </html>
